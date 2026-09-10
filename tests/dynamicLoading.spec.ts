@@ -22,9 +22,9 @@ async function loadingChanges(dynamicLoadingPage: DynamicLoadingPage) {
     await expect(dynamicLoadingPage.hello).toHaveText('Hello World!');
 }
 
-test.describe('Herokuapp Dynamic loading and Disappearing elements', () => {
+test.describe('Herokuapp Dynamic loading', () => {
     test.beforeEach(async ({ page }) => {
-        await page.goto('https://the-internet.herokuapp.com/');
+        await page.goto('/');
     });
 
     test('go to dynamic loading', async ({ dynamicLoadingPage }) => {
