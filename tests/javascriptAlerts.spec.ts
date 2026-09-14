@@ -7,27 +7,27 @@ async function goToSection(alertsPage: AlertsPage) {
 }
 
 async function dialogAccept(alertsPage: AlertsPage, text: String) {
-    alertsPage.page.on('dialog', async (dialog) => {
+    alertsPage.page.once('dialog', async (dialog) => {
         expect(dialog.message()).toBe(`I am a JS ${text}`);
         await dialog.accept();
     });
 }
 
 async function dialogCancel(alertsPage: AlertsPage, text: String) {
-    alertsPage.page.on('dialog', async (dialog) => {
+    alertsPage.page.once('dialog', async (dialog) => {
         expect(dialog.message()).toBe(`I am a JS ${text}`);
         await dialog.dismiss();
     });
 }
 
 async function dialogPrompt(alertsPage: AlertsPage, text: String) {
-    alertsPage.page.on('dialog', async (dialog) => {
+    alertsPage.page.once('dialog', async (dialog) => {
         expect(dialog.message()).toBe(`I am a JS ${text}`);
         await dialog.accept('hola!');
     });
 }
 
-test.describe('Herokuapp Javascript Alerts', async () => {
+test.describe('Herokuapp Javascript Alerts', () => {
 
     test.beforeEach(async ({ page }) => {
         await page.goto('/');
@@ -51,7 +51,6 @@ test.describe('Herokuapp Javascript Alerts', async () => {
     test('JS alert', async ({alertsPage}) => {
         await goToSection(alertsPage);
         await dialogAccept(alertsPage, 'Alert');
-        await alertsPage.page.getByRole('button', { name: 'Click for JS Alert' }).click();
         await alertsPage.alert.click();
         await expect(alertsPage.resultAlert).toBeVisible();
         await expect(alertsPage.resultAlert).toHaveText('You successfully clicked an alert');
