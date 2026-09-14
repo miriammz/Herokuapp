@@ -13,7 +13,7 @@ async function expectNotVisible (disappearingElementsPage: DisappearingElementsP
     await expect(disappearingElementsPage.portfolio).not.toBeVisible();
 }
 
-async function expectGalleryIfVisible (disappearingElementsPage: DisappearingElementsPage) {
+async function isGalleryVisible (disappearingElementsPage: DisappearingElementsPage) {
     return await disappearingElementsPage.gallery.count() > 0;
 }
 
@@ -35,7 +35,7 @@ test.describe('Herokuapp Disappearing elements', () => {
         await expect(disappearingElementsPage.contact).toHaveText('Contact Us');
         await expect(disappearingElementsPage.portfolio).toBeVisible();
         await expect(disappearingElementsPage.portfolio).toHaveText('Portfolio');
-        const gallery = await expectGalleryIfVisible(disappearingElementsPage);
+        const gallery = await isGalleryVisible(disappearingElementsPage);
         if (gallery) {
             await expect(disappearingElementsPage.gallery).toHaveText('Gallery');
         };
@@ -77,7 +77,7 @@ test.describe('Herokuapp Disappearing elements', () => {
 
     test('gallery', async ({disappearingElementsPage}) => {
         await goToSection(disappearingElementsPage);
-        const gallery = await expectGalleryIfVisible(disappearingElementsPage);
+        const gallery = await isGalleryVisible(disappearingElementsPage);
         if (gallery) {
             await expect(disappearingElementsPage.gallery).toHaveText('Gallery');
             await disappearingElementsPage.gallery.click();
