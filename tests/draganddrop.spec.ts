@@ -26,14 +26,14 @@ test.describe('Herokuapp Drag and Drop', () => {
 
     test('move A to B position', async({dragAndDropPage}) => {
         await goToSection(dragAndDropPage);
-        dragAndDropPage.a.dragTo(dragAndDropPage.b);
+        await dragAndDropPage.a.dragTo(dragAndDropPage.b);
         await expect(dragAndDropPage.a).toHaveText('B');
         await expect(dragAndDropPage.b).toHaveText('A');
     });
 
     test('move B to A position', async({dragAndDropPage}) => {
         await goToSection(dragAndDropPage);
-        dragAndDropPage.b.dragTo(dragAndDropPage.a);
+        await dragAndDropPage.b.dragTo(dragAndDropPage.a);
         await expect(dragAndDropPage.a).toHaveText('B');
         await expect(dragAndDropPage.b).toHaveText('A');
     });
