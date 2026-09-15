@@ -4,7 +4,7 @@ import { DisappearingElementsPage } from '../pages/disappearingElementsPage';
 import { AlertsPage } from '../pages/javascriptAlertsPage';
 import { FramesPage } from '../pages/framesPage';
 import { CheckboxesPage } from '../pages/checkboxesPage';
-import { DragAndDropPage } from '../pages/draganddropPage';
+import { DragAndDropPage } from '../pages/dragAndDropPage';
 
 type HerokuappFixtures = {
     dynamicLoadingPage: DynamicLoadingPage;

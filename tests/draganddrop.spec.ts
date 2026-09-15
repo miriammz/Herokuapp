@@ -1,5 +1,5 @@
 import { test, expect } from './fixtures/herokuapp-test';
-import { DragAndDropPage } from './pages/draganddropPage';
+import { DragAndDropPage } from './pages/dragAndDropPage';
 
 async function goToSection(dragAndDropPage: DragAndDropPage) {
     await dragAndDropPage.link.click();
