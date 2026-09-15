@@ -24,9 +24,9 @@ export class FramesPage {
         this.title = page.getByRole('heading', { name: 'Frames' });
         this.nested = page.getByRole('link', { name: 'Nested Frames' });
         this.iframe = page.getByRole('link', { name: 'iFrame' });
-        this.left = page.frameLocator().getByText('LEFT');
+        this.left = page.locator('frame[name="frame-top"]').contentFrame().locator('frame[name="frame-left"]').contentFrame().locator('body');
         this.middle = page.locator('frame[name="frame-top"]').contentFrame().locator('frame[name="frame-middle"]').contentFrame().locator('body');
-        this.right = page.frameLocator().getByText('RIGHT');
+        this.right = page.locator('frame[name="frame-top"]').contentFrame().locator('frame[name="frame-right"]').contentFrame().locator('body');
         this.bottom = page.locator('frame[name="frame-bottom"]').contentFrame().getByText('BOTTOM');
         this.alert = page.getByRole('alert');
         this.alertText1 = page.getByText('TinyMCE is in read-only mode');
