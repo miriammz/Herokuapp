@@ -4,6 +4,7 @@ import { DisappearingElementsPage } from '../pages/disappearingElementsPage';
 import { AlertsPage } from '../pages/javascriptAlertsPage';
 import { FramesPage } from '../pages/framesPage';
 import { CheckboxesPage } from '../pages/checkboxesPage';
+import { DragAndDropPage } from '../pages/draganddropPage';
 
 type HerokuappFixtures = {
     dynamicLoadingPage: DynamicLoadingPage;
@@ -11,6 +12,7 @@ type HerokuappFixtures = {
     alertsPage: AlertsPage;
     framesPage: FramesPage;
     checkboxesPage: CheckboxesPage;
+    dragAndDropPage: DragAndDropPage;
 }
 
 export const test = base.extend<HerokuappFixtures>({
@@ -32,6 +34,10 @@ export const test = base.extend<HerokuappFixtures>({
 
     checkboxesPage: async ({page}, use) => {
         await use(new CheckboxesPage(page));
+    },
+
+    dragAndDropPage: async ({page}, use) => {
+        await use(new DragAndDropPage(page));
     }
 });
 
