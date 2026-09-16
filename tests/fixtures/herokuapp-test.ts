@@ -7,6 +7,7 @@ import { CheckboxesPage } from '../pages/checkboxesPage';
 import { DragAndDropPage } from '../pages/dragAndDropPage';
 import { DropdownPage } from '../pages/dropdownPage';
 import { HoversPage } from '../pages/hoversPage';
+import { BasicAuthPage } from '../pages/basicAuthPage';
 
 type HerokuappFixtures = {
     dynamicLoadingPage: DynamicLoadingPage;
@@ -17,6 +18,7 @@ type HerokuappFixtures = {
     dragAndDropPage: DragAndDropPage;
     dropdownPage: DropdownPage;
     hoversPage: HoversPage;
+    basicAuthPage: BasicAuthPage;
 }
 
 export const test = base.extend<HerokuappFixtures>({
@@ -50,6 +52,10 @@ export const test = base.extend<HerokuappFixtures>({
 
     hoversPage: async ({page}, use) => {
         await use(new HoversPage(page));
+    }, 
+
+    basicAuthPage: async ({page}, use) => {
+        await use(new BasicAuthPage(page));
     }
 });
 
