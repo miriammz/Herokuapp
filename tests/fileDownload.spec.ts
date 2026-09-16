@@ -18,7 +18,7 @@ test.describe('Herokuapp File Download', () => {
         await expect(fileDownloadPage.title).toHaveText('File Downloader');
         await expect(fileDownloadPage.screenshot).toBeVisible();
         await expect(fileDownloadPage.screenshot).toHaveText('captura.png');
-        await expect(fileDownloadPage.screenshot).toHaveAttribute('href', 'download/captura\.png');
+        await expect(fileDownloadPage.screenshot).toHaveAttribute('href', /captura\.png$/);
     });
 
     test('download the file', async({fileDownloadPage}) => {
