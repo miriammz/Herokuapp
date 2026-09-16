@@ -8,7 +8,7 @@ async function goToSection(dragAndDropPage: DragAndDropPage) {
 
 test.describe('Herokuapp Drag and Drop', () => {
 
-        test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page }) => {
         await page.goto('/');
     });
 
