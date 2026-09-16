@@ -19,7 +19,7 @@ export class FileUploadPage {
         this.link = page.getByRole('link', { name: 'File Upload' });
         this.title = page.getByRole('heading', { name: 'File Uploader' });
         this.description = page.getByText('Choose a file on your system');
-        this.chooseFile = page.locator('input[type="file"]').first();
+        this.chooseFile = page.getByRole('button', { name: 'Choose File' });
         this.upload = page.getByRole('button', { name: 'Upload' });
         this.square = page.locator('#drag-drop-upload');
         this.dragDrop = page.locator('.dz-hidden-input');
