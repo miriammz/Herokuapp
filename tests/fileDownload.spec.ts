@@ -1,5 +1,6 @@
 import { test, expect } from './fixtures/herokuapp-test';
 import { FileDownloadPage } from './pages/fileDownloadPage';
+import path from 'path';
 
 async function goToSection(fileDownloadPage: FileDownloadPage) {
     await fileDownloadPage.link.click();
@@ -21,7 +22,15 @@ test.describe('Herokuapp File Download', () => {
         await expect(fileDownloadPage.screenshot).toHaveAttribute('href', /captura\.png$/);
     });
 
-    test('download the file', async({fileDownloadPage}) => {
+    test('download the file', async({fileDownloadPage, fileUploadPage}) => {
+        //se sube primero el fichero para no depender de un externo
+        await fileUploadPage.link.click();
+        await expect(fileUploadPage.page).toHaveURL(/upload/);
+        const filePath = path.join(__dirname, 'files', 'captura.png');
+        await fileUploadPage.uploadFile(filePath);
+        await fileUploadPage.upload.click();
+        await expect(fileUploadPage.title2).toBeVisible();
+        await fileDownloadPage.page.goto('/');
         await goToSection(fileDownloadPage);
         const download1Promise = fileDownloadPage.page.waitForEvent('download');
         await fileDownloadPage.screenshot.click();

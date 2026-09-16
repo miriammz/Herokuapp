@@ -22,13 +22,13 @@ test.describe('Herokuapp File Upload', () => {
         await expect(fileUploadPage.chooseFile).toHaveAttribute('type', 'file');
         await expect(fileUploadPage.upload).toBeVisible();
         await expect(fileUploadPage.upload).toHaveText('Upload');
-        await expect(fileUploadPage.dragDrop).toBeVisible();
+        await expect(fileUploadPage.square).toBeVisible();
     });
 
     test('select file', async({fileUploadPage}) => {
         await goToSection(fileUploadPage);
         const filePath = path.join(__dirname, 'files', 'captura.png');
-        await fileUploadPage.chooseFile.setInputFiles(filePath);
+        await fileUploadPage.uploadFile(filePath);
         await expect(fileUploadPage.chooseFile).toHaveValue(/captura\.png$/);
         await fileUploadPage.upload.click();
         await expect(fileUploadPage.title).not.toBeVisible();
