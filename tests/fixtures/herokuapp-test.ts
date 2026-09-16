@@ -8,6 +8,7 @@ import { DragAndDropPage } from '../pages/dragAndDropPage';
 import { DropdownPage } from '../pages/dropdownPage';
 import { HoversPage } from '../pages/hoversPage';
 import { BasicAuthPage } from '../pages/basicAuthPage';
+import { FileUploadPage } from '../pages/fileUploadPage';
 
 type HerokuappFixtures = {
     dynamicLoadingPage: DynamicLoadingPage;
@@ -19,6 +20,7 @@ type HerokuappFixtures = {
     dropdownPage: DropdownPage;
     hoversPage: HoversPage;
     basicAuthPage: BasicAuthPage;
+    fileUploadPage: FileUploadPage;
 }
 
 export const test = base.extend<HerokuappFixtures>({
@@ -56,6 +58,10 @@ export const test = base.extend<HerokuappFixtures>({
 
     basicAuthPage: async ({page}, use) => {
         await use(new BasicAuthPage(page));
+    },
+
+    fileUploadPage: async ({page}, use) => {
+        await use(new FileUploadPage(page));
     }
 });
 
