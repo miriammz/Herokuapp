@@ -29,18 +29,12 @@ test.describe('Herokuapp Basic Auth con credenciales correctas', () => {
 
 test.describe('Herokuapp Basic Auth con credenciales incorrectas', () => {
 
-    test.beforeEach(async ({ page }) => {
-        await page.goto('/');
-    });
-
-    test('empty username and password', async ({basicAuthPage, request}) => {
-        await goToSection(basicAuthPage);
+    test('without credentials', async ({ request}) => {
         const response = await request.get('https://the-internet.herokuapp.com/basic_auth');
         await expect(response.status()).toBe(401);
     });
 
-    test('invalid username and password', async ({basicAuthPage, request}) => {
-        await goToSection(basicAuthPage);
+    test('invalid username and password', async ({ request}) => {
         const response = await request.get('https://gerger:rgres@the-internet.herokuapp.com/basic_auth');
         await expect(response.status()).toBe(401);
     });
