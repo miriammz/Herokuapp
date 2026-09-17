@@ -1,9 +1,9 @@
 import { test, expect } from './fixtures/herokuapp-test';
 import { MultipleWindowsPage } from './pages/multipleWindowsPage';
 
-async function goToSection(multipleWindowsPAge: MultipleWindowsPage) {
-    await multipleWindowsPAge.link.click();
-    await expect(multipleWindowsPAge.page).toHaveURL(/windows/);
+async function goToSection(multipleWindowsPage: MultipleWindowsPage) {
+    await multipleWindowsPage.link.click();
+    await expect(multipleWindowsPage.page).toHaveURL(/windows/);
 }
 
 test.describe('Herokuapp Multiple Windows', () => {
@@ -28,5 +28,6 @@ test.describe('Herokuapp Multiple Windows', () => {
         await expect(newWindow).toHaveURL(/new/);
         await expect(newWindow.getByRole('heading', { name: 'New Window' })).toBeVisible();
         await expect(newWindow.getByRole('heading', { name: 'New Window' })).toHaveText('New Window');
+        await newWindow.close();
     });
 });
