@@ -8,7 +8,7 @@ async function goToSection(sortableDataTablesPage: SortableDataTablesPage) {
 }
 
 async function sortAndCheckTable1(
-    sortableDataTablesPage: SortableDataTablesPage,
+    table: Locator,
     column: Locator,
     locator: string,
     isCurrency: boolean = false
@@ -23,20 +23,20 @@ async function sortAndCheckTable1(
         return left.localeCompare(right);
     };
 
-    await expect(sortableDataTablesPage.table1.locator(locator).first()).toBeVisible();
-    const baseRows = await sortableDataTablesPage.table1.locator(locator).allTextContents();
+    await expect(table.locator(locator).first()).toBeVisible();
+    const baseRows = await table.locator(locator).allTextContents();
     const expectedAscending = [...baseRows].map(normalizeForSort).sort(compareValues);
 
     //orden ascendente
     await column.click();
-    await expect(sortableDataTablesPage.table1.locator(locator).first()).toBeVisible();
-    const ascRows = await sortableDataTablesPage.table1.locator(locator).allTextContents();
+    await expect(table.locator(locator).first()).toBeVisible();
+    const ascRows = await table.locator(locator).allTextContents();
     expect(ascRows.map(normalizeForSort)).toEqual(expectedAscending);
 
     //orden descendente
     await column.click();
-    await expect(sortableDataTablesPage.table1.locator(locator).first()).toBeVisible();
-    const descRows = await sortableDataTablesPage.table1.locator(locator).allTextContents();
+    await expect(table.locator(locator).first()).toBeVisible();
+    const descRows = await table.locator(locator).allTextContents();
     const expectedDescending = [...expectedAscending].reverse();
     expect(descRows.map(normalizeForSort)).toEqual(expectedDescending);
 }
@@ -70,27 +70,27 @@ test.describe('Herokuapp Sortable Data Tables', () => {
 
     test('sort by last name table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage, sortableDataTablesPage.lastName1, 'tbody tr');
+        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.lastName1, 'tbody tr');
     });
 
     test('sort by first name table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage, sortableDataTablesPage.firstName1, 'tbody tr td:nth-child(2)');
+        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.firstName1, 'tbody tr td:nth-child(2)');
     });
 
     test('sort by email table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage, sortableDataTablesPage.email1, 'tbody tr td:nth-child(3)');
+        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.email1, 'tbody tr td:nth-child(3)');
     });
 
     test('sort by due table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage, sortableDataTablesPage.due1, 'tbody tr td:nth-child(4)', true);
+        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.due1, 'tbody tr td:nth-child(4)', true);
     });
 
     test('sort by web site table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage, sortableDataTablesPage.website1, 'tbody tr td:nth-child(5)');
+        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.website1, 'tbody tr td:nth-child(5)');
     });
 
     test('sort by action 1', async({sortableDataTablesPage}) => {
@@ -102,6 +102,43 @@ test.describe('Herokuapp Sortable Data Tables', () => {
         await sortableDataTablesPage.action1.click();
         await expect(sortableDataTablesPage.table1.locator('tbody tr').first()).toBeVisible();
         const textAfter = await sortableDataTablesPage.table1.locator('tbody tr').allTextContents();
+        expect(defaultText).toEqual(textAfter);
+    });
+
+    test('sort by last name table 2', async({sortableDataTablesPage}) => {
+        await goToSection(sortableDataTablesPage);
+        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.lastName2, 'td.last-name');
+    });
+
+    test('sort by first name table 2', async({sortableDataTablesPage}) => {
+        await goToSection(sortableDataTablesPage);
+        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.firstName2, 'td.first-name');
+    });
+
+    test('sort by email table 2', async({sortableDataTablesPage}) => {
+        await goToSection(sortableDataTablesPage);
+        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.email2, 'td.email');
+    });
+
+    test('sort by due table 2', async({sortableDataTablesPage}) => {
+        await goToSection(sortableDataTablesPage);
+        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.due2, 'td.dues', true);
+    });
+
+    test('sort by web site table 2', async({sortableDataTablesPage}) => {
+        await goToSection(sortableDataTablesPage);
+        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.website2, 'td.web-site');
+    });
+
+    test('sort by action 2', async({sortableDataTablesPage}) => {
+        await goToSection(sortableDataTablesPage);
+        await expect(sortableDataTablesPage.table2.locator('td.action').first()).toBeVisible();
+        const defaultText = await sortableDataTablesPage.table2.locator('td.action').allTextContents();
+        await sortableDataTablesPage.lastName2.click();
+        await expect(sortableDataTablesPage.table2.locator('td.action').first()).toBeVisible();
+        await sortableDataTablesPage.action2.click();
+        await expect(sortableDataTablesPage.table2.locator('td.action').first()).toBeVisible();
+        const textAfter = await sortableDataTablesPage.table2.locator('td.action').allTextContents();
         expect(defaultText).toEqual(textAfter);
     });
 });

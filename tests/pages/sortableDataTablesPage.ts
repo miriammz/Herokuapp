@@ -17,6 +17,12 @@ export class SortableDataTablesPage {
     readonly example2: Locator;
     readonly description2: Locator;
     readonly table2: Locator;
+    readonly lastName2: Locator;
+    readonly firstName2: Locator;
+    readonly email2: Locator;
+    readonly due2: Locator;
+    readonly website2: Locator;
+    readonly action2: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -35,5 +41,11 @@ export class SortableDataTablesPage {
         this.example2 = page.getByRole('heading', { name: 'Example 2' });
         this.description2 = page.getByText('Class and ID attributes to');
         this.table2 = page.locator('#table2');
+        this.lastName2 = page.locator('#table2 span.last-name');
+        this.firstName2 = page.locator('#table2 span.first-name');
+        this.email2 = page.locator('#table2 span.email');
+        this.due2 = page.locator('#table2 span.dues');
+        this.website2 = page.locator('#table2 span.web-site');
+        this.action2 = page.locator('#table2 span.action');
     }
 }
