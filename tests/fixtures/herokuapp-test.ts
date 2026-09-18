@@ -11,6 +11,7 @@ import { BasicAuthPage } from '../pages/basicAuthPage';
 import { FileUploadPage } from '../pages/fileUploadPage';
 import { FileDownloadPage } from '../pages/fileDownloadPage';
 import { MultipleWindowsPage } from '../pages/multipleWindowsPage';
+import { SortableDataTablesPage } from '../pages/sortableDataTablesPage';
 
 type HerokuappFixtures = {
     dynamicLoadingPage: DynamicLoadingPage;
@@ -25,6 +26,7 @@ type HerokuappFixtures = {
     fileUploadPage: FileUploadPage;
     fileDownloadPage: FileDownloadPage;
     multipleWindowsPage: MultipleWindowsPage;
+    sortableDataTablesPage: SortableDataTablesPage;
 }
 
 export const test = base.extend<HerokuappFixtures>({
@@ -74,6 +76,10 @@ export const test = base.extend<HerokuappFixtures>({
 
     multipleWindowsPage: async ({page}, use) => {
         await use(new MultipleWindowsPage(page));
+    }, 
+
+    sortableDataTablesPage: async ({page}, use) => {
+        await use(new SortableDataTablesPage(page));
     }
 });
 
