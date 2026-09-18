@@ -30,15 +30,11 @@ async function sortAndCheck(
     //orden ascendente
     await column.click();
     await expect(table.locator(locator)).toHaveText(expectedAscending);
-    const ascRows = await table.locator(locator).allTextContents();
-    expect(ascRows.map(normalizeForSort)).toEqual(expectedAscending);
 
     //orden descendente
-    await column.click();
-    await expect(table.locator(locator)).toHaveText(expectedAscending);
-    const descRows = await table.locator(locator).allTextContents();
     const expectedDescending = [...expectedAscending].reverse();
-    expect(descRows.map(normalizeForSort)).toEqual(expectedDescending);
+    await column.click();
+    await expect(table.locator(locator)).toHaveText(expectedDescending);
 }
 
 test.describe('Herokuapp Sortable Data Tables', () => {
