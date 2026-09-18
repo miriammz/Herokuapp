@@ -34,6 +34,5 @@ export class FramesPage {
         this.close = page.getByRole('button', { name: 'Close' });
         this.titleiFrame = page.getByRole('heading', { name: 'An iFrame containing the' });
         this.iframeContainer = page.locator('iframe[title="Rich Text Area"]').contentFrame().locator('html');
-        this.text = page.locator('iframe[title="Rich Text Area"]').contentFrame().getByText('Your content goes here.');
-    }
+        this.text = page.locator('iframe[title="Rich Text Area"]').contentFrame().locator('#tinymce');    }
 }

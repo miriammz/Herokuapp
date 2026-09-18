@@ -35,23 +35,41 @@ test.describe('Herokuapp Frames and Nested frames', () => {
         await expect(framesPage.bottom).toHaveText('BOTTOM');
     });
 
+    //para este test: puede salir una alerta porque se usa una API externa 
+    //gratuita y se ha agotado la cuota mensual, por lo que el test se adapta 
+    //a los dos casos (comprobar la alerta y que no cambia  el texto al 
+    //intentar escribir algo y que no haya alerta y se pueda escribir)
     test('iframes', async({framesPage}) => {
         await goToSection(framesPage);
         await framesPage.iframe.click();
         await expect(framesPage.page).toHaveURL(/iframe/);
-        //la alerta sale porque se usa una API externa gratuita y se ha
-        //agotado la cuota mensual, por lo que el text se adapta a lo que
-        //se puede hacer ahora mismo (comprobar la alerta y que no cambia 
-        //el texto al intentar escribir algo)
-        await expect(framesPage.alert).toBeVisible();
-        await expect(framesPage.alertText1).toBeVisible();
-        await expect(framesPage.alertText2).toBeVisible();
-        await framesPage.close.click();
-        await expect(framesPage.alert).not.toBeVisible();
-        await expect(framesPage.titleiFrame).toBeVisible();
-        await expect(framesPage.titleiFrame).toHaveText('An iFrame containing the TinyMCE WYSIWYG Editor');
-        await expect(framesPage.iframeContainer).toBeVisible();
-        await framesPage.text.pressSequentially('prueba');
-        await expect(framesPage.text).toHaveText('Your content goes here.');
+
+         let quotaAgotada = true;
+        try {
+            await framesPage.alert.waitFor({ state: 'visible', timeout: 8000 });
+        } catch {
+            quotaAgotada = false;
+        }
+
+        if (quotaAgotada) {
+            await expect(framesPage.alert).toBeVisible();
+            await expect(framesPage.alertText1).toBeVisible();
+            await expect(framesPage.alertText2).toBeVisible();
+            await framesPage.close.click();
+            await expect(framesPage.alert).not.toBeVisible();
+            await expect(framesPage.titleiFrame).toBeVisible();
+            await expect(framesPage.titleiFrame).toHaveText('An iFrame containing the TinyMCE WYSIWYG Editor');
+            await expect(framesPage.iframeContainer).toBeVisible();
+            await framesPage.text.pressSequentially('prueba');
+            await expect(framesPage.text).toHaveText('Your content goes here.');
+        } else {
+            await expect(framesPage.titleiFrame).toBeVisible();
+            await expect(framesPage.titleiFrame).toHaveText('An iFrame containing the TinyMCE WYSIWYG Editor');
+            await expect(framesPage.iframeContainer).toBeVisible();
+            //await framesPage.text.pressSequentially('prueba');
+            await expect(framesPage.text).toHaveText('Your content goes here.');
+            await framesPage.text.fill('prueba');
+            await expect(framesPage.text).toHaveText('prueba');
+        }
     });
 });
