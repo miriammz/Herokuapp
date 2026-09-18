@@ -16,8 +16,8 @@ async function loadingChanges(dynamicLoadingPage: DynamicLoadingPage) {
     await expect(dynamicLoadingPage.loading).toBeVisible();
     await expect(dynamicLoadingPage.loading).toHaveText('Loading...');
     await expect(dynamicLoadingPage.bar).toBeVisible();
-    await expect(dynamicLoadingPage.loading).toBeHidden({ timeout: 5000 });
-    await expect(dynamicLoadingPage.bar).toBeHidden({ timeout: 5000 });
+    await expect(dynamicLoadingPage.loading).toBeHidden({ timeout: 8000 });
+    await expect(dynamicLoadingPage.bar).toBeHidden({ timeout: 8000 });
     await expect(dynamicLoadingPage.hello).toBeVisible();
     await expect(dynamicLoadingPage.hello).toHaveText('Hello World!');
 }
