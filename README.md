@@ -19,7 +19,7 @@ npm run report
 
 
 ## Structure
-Dentro de la carpeta tests se encuentran los ficheros *spec.ts (organizados por área) y dos carpetas, fixtures y pages (también por área)
+Dentro de la carpeta tests se encuentran los ficheros *spec.ts (organizados por área) y dos carpetas, fixtures y pages (también por área). Existe también una carpeta files en la cual se encuentra una captura, sirve como fichero a utilizar para comprobar fileUpload y fileDownload
 
 ## GitHub Actions
-Estos tests corren en CI con GitHub Actions, ya que existe el fichero playwright.yml dentro del repo
+Estos tests corren en CI con GitHub Actions, ya que existe el fichero playwright.yml (.github/workflows/playwright.yml) dentro del repo
