@@ -66,7 +66,6 @@ test.describe('Herokuapp Frames and Nested frames', () => {
             await expect(framesPage.titleiFrame).toBeVisible();
             await expect(framesPage.titleiFrame).toHaveText('An iFrame containing the TinyMCE WYSIWYG Editor');
             await expect(framesPage.iframeContainer).toBeVisible();
-            //await framesPage.text.pressSequentially('prueba');
             await expect(framesPage.text).toHaveText('Your content goes here.');
             await framesPage.text.fill('prueba');
             await expect(framesPage.text).toHaveText('prueba');
