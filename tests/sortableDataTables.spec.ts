@@ -7,7 +7,7 @@ async function goToSection(sortableDataTablesPage: SortableDataTablesPage) {
     await expect(sortableDataTablesPage.page).toHaveURL(/tables/);
 }
 
-async function sortAndCheckTable1(
+async function sortAndCheck(
     table: Locator,
     column: Locator,
     locator: string,
@@ -70,27 +70,27 @@ test.describe('Herokuapp Sortable Data Tables', () => {
 
     test('sort by last name table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.lastName1, 'tbody tr');
+        await sortAndCheck(sortableDataTablesPage.table1, sortableDataTablesPage.lastName1, 'tbody tr');
     });
 
     test('sort by first name table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.firstName1, 'tbody tr td:nth-child(2)');
+        await sortAndCheck(sortableDataTablesPage.table1, sortableDataTablesPage.firstName1, 'tbody tr td:nth-child(2)');
     });
 
     test('sort by email table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.email1, 'tbody tr td:nth-child(3)');
+        await sortAndCheck(sortableDataTablesPage.table1, sortableDataTablesPage.email1, 'tbody tr td:nth-child(3)');
     });
 
     test('sort by due table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.due1, 'tbody tr td:nth-child(4)', true);
+        await sortAndCheck(sortableDataTablesPage.table1, sortableDataTablesPage.due1, 'tbody tr td:nth-child(4)', true);
     });
 
     test('sort by web site table 1', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table1, sortableDataTablesPage.website1, 'tbody tr td:nth-child(5)');
+        await sortAndCheck(sortableDataTablesPage.table1, sortableDataTablesPage.website1, 'tbody tr td:nth-child(5)');
     });
 
     test('sort by action 1', async({sortableDataTablesPage}) => {
@@ -107,27 +107,27 @@ test.describe('Herokuapp Sortable Data Tables', () => {
 
     test('sort by last name table 2', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.lastName2, 'td.last-name');
+        await sortAndCheck(sortableDataTablesPage.table2, sortableDataTablesPage.lastName2, 'td.last-name');
     });
 
     test('sort by first name table 2', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.firstName2, 'td.first-name');
+        await sortAndCheck(sortableDataTablesPage.table2, sortableDataTablesPage.firstName2, 'td.first-name');
     });
 
     test('sort by email table 2', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.email2, 'td.email');
+        await sortAndCheck(sortableDataTablesPage.table2, sortableDataTablesPage.email2, 'td.email');
     });
 
     test('sort by due table 2', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.due2, 'td.dues', true);
+        await sortAndCheck(sortableDataTablesPage.table2, sortableDataTablesPage.due2, 'td.dues', true);
     });
 
     test('sort by web site table 2', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await sortAndCheckTable1(sortableDataTablesPage.table2, sortableDataTablesPage.website2, 'td.web-site');
+        await sortAndCheck(sortableDataTablesPage.table2, sortableDataTablesPage.website2, 'td.web-site');
     });
 
     test('sort by action 2', async({sortableDataTablesPage}) => {
