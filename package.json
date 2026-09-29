@@ -21,6 +21,7 @@
   "homepage": "https://github.com/miriammz/Herokuapp#readme",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@types/node": "^22.20.2"
+    "@types/node": "^22.20.2",
+    "typescript": "^5.9.3"
   }
 }
