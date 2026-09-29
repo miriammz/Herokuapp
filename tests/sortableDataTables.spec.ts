@@ -94,6 +94,7 @@ test.describe('Herokuapp Sortable Data Tables', () => {
         await expect(sortableDataTablesPage.table1.locator('tbody tr').first()).toBeVisible();
         const defaultText = await sortableDataTablesPage.table1.locator('tbody tr').allTextContents();
         await sortableDataTablesPage.lastName1.click();
+        await expect(sortableDataTablesPage.table1.locator('tbody tr')).not.toHaveText(defaultText);
         await sortableDataTablesPage.action1.click();
         await expect(sortableDataTablesPage.table1.locator('tbody tr')).toHaveText(defaultText);
     });
@@ -125,10 +126,11 @@ test.describe('Herokuapp Sortable Data Tables', () => {
 
     test('sort by action 2', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        await expect(sortableDataTablesPage.table2.locator('td.action').first()).toBeVisible();
-        const defaultText = await sortableDataTablesPage.table2.locator('td.action').allTextContents();
+        await expect(sortableDataTablesPage.table2.locator('tbody tr').first()).toBeVisible();
+        const defaultText = await sortableDataTablesPage.table2.locator('tbody tr').allTextContents();
         await sortableDataTablesPage.lastName2.click();
+        await expect(sortableDataTablesPage.table2.locator('tbody tr')).not.toHaveText(defaultText);
         await sortableDataTablesPage.action2.click();
-        await expect(sortableDataTablesPage.table2.locator('td.action')).toHaveText(defaultText);
+        await expect(sortableDataTablesPage.table2.locator('tbody tr')).toHaveText(defaultText);
     });
 });
