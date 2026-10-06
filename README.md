@@ -1,3 +1,5 @@
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=miriammz_Herokuapp)](https://sonarcloud.io/summary/new_code?id=miriammz_Herokuapp)
+
 # Herokuapp
 Suite de tests E2E con Playwright sobre the-internet.herokuapp.com
 (no está absolutamente todo, solo lo que no se ha cubierto con saucedemo.com)
