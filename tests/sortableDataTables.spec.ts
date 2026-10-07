@@ -15,11 +15,11 @@ async function sortAndCheck(
 ) {
     const normalizeForSort = (value: string) => value.trim();
     const compareValues = (left: string, right: string) => {
-        if (isCurrency) {
+        /*if (isCurrency) {
             const leftNum = Number(left.replace(/[$,]/g, ''));
             const rightNum = Number(right.replace(/[$,]/g, ''));
             return leftNum - rightNum;
-        }
+        }*/
         return left.localeCompare(right);
     };
 
@@ -111,7 +111,7 @@ test.describe('Herokuapp Sortable Data Tables', () => {
 
     test('sort by email table 2', async({sortableDataTablesPage}) => {
         await goToSection(sortableDataTablesPage);
-        sortAndCheck(sortableDataTablesPage.table2, sortableDataTablesPage.email2, 'td.email');
+        await sortAndCheck(sortableDataTablesPage.table2, sortableDataTablesPage.email2, 'td.email');
     });
 
     test('sort by due table 2', async({sortableDataTablesPage}) => {
