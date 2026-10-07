@@ -110,7 +110,7 @@ test.describe('Herokuapp Sortable Data Tables', () => {
     });
 
     test('sort by email table 2', async({sortableDataTablesPage}) => {
-        await goToSection(sortableDataTablesPage);
+        goToSection(sortableDataTablesPage);
         await sortAndCheck(sortableDataTablesPage.table2, sortableDataTablesPage.email2, 'td.email');
     });
 
