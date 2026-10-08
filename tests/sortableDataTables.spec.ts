@@ -1,10 +1,11 @@
 import { Locator } from '@playwright/test';
-import { test, expect } from './fixtures/herokuapp-test';
+import { fulfillFromServer, test, expect } from './fixtures/herokuapp-test';
 import { SortableDataTablesPage } from './pages/sortableDataTablesPage';
 
 async function goToSection(sortableDataTablesPage: SortableDataTablesPage) {
     await sortableDataTablesPage.link.click();
-    await expect(sortableDataTablesPage.page).toHaveURL(/tables/);
+    await expect(sortableDataTablesPage.page).toHaveURL(/\/tables$/);
+    await expect(sortableDataTablesPage.title).toBeVisible();
 }
 
 async function sortAndCheck(
@@ -15,11 +16,11 @@ async function sortAndCheck(
 ) {
     const normalizeForSort = (value: string) => value.trim();
     const compareValues = (left: string, right: string) => {
-        /*if (isCurrency) {
+        if (isCurrency) {
             const leftNum = Number(left.replace(/[$,]/g, ''));
             const rightNum = Number(right.replace(/[$,]/g, ''));
             return leftNum - rightNum;
-        }*/
+        }
         return left.localeCompare(right);
     };
 
@@ -38,8 +39,10 @@ async function sortAndCheck(
 }
 
 test.describe('Herokuapp Sortable Data Tables', () => {
+    test.describe.configure({ mode: 'serial' });
 
     test.beforeEach(async ({ page }) => {
+        await page.route('**/js/vendor/jquery.tablesorter.min.js', route => fulfillFromServer(route, 'tablesorter'));
         await page.goto('/');
     });
 
@@ -52,14 +55,14 @@ test.describe('Herokuapp Sortable Data Tables', () => {
         await expect(sortableDataTablesPage.example1).toHaveText('Example 1');
         await expect(sortableDataTablesPage.description1).toBeVisible();
         await expect(sortableDataTablesPage.table1).toBeVisible();
-        await expect(sortableDataTablesPage.table1.locator('th.header')).toHaveText([
+        await expect(sortableDataTablesPage.table1.locator('thead th')).toHaveText([
             'Last Name', 'First Name', 'Email', 'Due', 'Web Site', 'Action'
         ]);
         await expect(sortableDataTablesPage.example2).toBeVisible();
         await expect(sortableDataTablesPage.example2).toHaveText('Example 2');
         await expect(sortableDataTablesPage.description2).toBeVisible();
         await expect(sortableDataTablesPage.table2).toBeVisible();
-        await expect(sortableDataTablesPage.table2.locator('th.header')).toHaveText([
+        await expect(sortableDataTablesPage.table2.locator('thead th')).toHaveText([
             'Last Name', 'First Name', 'Email', 'Due', 'Web Site', 'Action'
         ]);
     });
